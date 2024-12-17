@@ -1,1 +1,1 @@
-# granny-shaysgreatafinds
+# Granny & Shays Great Finds
