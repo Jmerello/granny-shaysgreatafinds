@@ -1,44 +1,49 @@
-// Array to store cart items
-let cart = [];
+document.addEventListener('DOMContentLoaded', () => {
+    loadCartItems();
+    setupPayPalButton();
+});
 
-// Function to add item to the cart
-function addToCart(itemName, itemPrice) {
-    cart.push({ name: itemName, price: itemPrice });
-    updateCartDisplay();
-}
+// Function to load cart items from localStorage and display them
+function loadCartItems() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Function to update the cart display
-function updateCartDisplay() {
-    const cartContainer = document.getElementById('cart-items');
-    const totalContainer = document.getElementById('cart-total');
-    
-    cartContainer.innerHTML = '';
+    cartItemsContainer.innerHTML = '';
     let total = 0;
 
-    cart.forEach((item, index) => {
-        cartContainer.innerHTML += `
-            <li>
-                ${item.name} - $${item.price.toFixed(2)} 
-                <button onclick="removeFromCart(${index})">Remove</button>
-            </li>
-        `;
-        total += item.price;
-    });
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<li>Your cart is empty.</li>';
+    } else {
+        cart.forEach((item, index) => {
+            total += item.price;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                ${item.name} - $${item.price.toFixed(2)}
+                <button onclick="removeItem(${index})">Remove</button>
+            `;
+            cartItemsContainer.appendChild(listItem);
+        });
+    }
 
-    totalContainer.innerText = `Total: $${total.toFixed(2)}`;
+    cartTotalElement.textContent = total.toFixed(2);
 }
 
-// Function to remove item from the cart
-function removeFromCart(index) {
+// Function to remove an item from the cart
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart.splice(index, 1);
-    updateCartDisplay();
+    localStorage.setItem('cart', JSON.stringify(cart));
+    loadCartItems();
 }
 
-// PayPal payment button initialization
-function initializePayPalButton() {
+// Function to set up PayPal checkout
+function setupPayPalButton() {
     paypal.Buttons({
         createOrder: function(data, actions) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
             let total = cart.reduce((sum, item) => sum + item.price, 0);
+
             return actions.order.create({
                 purchase_units: [{
                     amount: {
@@ -49,18 +54,16 @@ function initializePayPalButton() {
         },
         onApprove: function(data, actions) {
             return actions.order.capture().then(function(details) {
-                alert(`Payment successful! Thank you, ${details.payer.name.given_name}`);
-                cart = [];
-                updateCartDisplay();
+                alert('Transaction completed by ' + details.payer.name.given_name);
+                // Clear the cart after successful payment
+                localStorage.removeItem('cart');
+                loadCartItems();
             });
         },
         onError: function(err) {
-            console.error(err);
-            alert('An error occurred during the payment process.');
+            console.error('PayPal Checkout Error:', err);
+            alert('An error occurred during the transaction. Please try again.');
         }
     }).render('#paypal-button-container');
 }
-
-// Initialize the PayPal button on page load
-document.addEventListener('DOMContentLoaded', initializePayPalButton);
 
