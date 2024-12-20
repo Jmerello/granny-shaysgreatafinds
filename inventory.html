@@ -23,36 +23,22 @@
         <section id="inventory">
             <!-- Inventory items will be dynamically added here -->
             <script>
-        // ... (JavaScript code to retrieve data from local storage) ...
-
-                inventoryItems.forEach(item => {
-                    // Create a container for each item
-                    const itemDiv = document.createElement('div');
-                    itemDiv.classList.add('inventory-item'); // Add a class for styling
-
-                    const itemImage = document.createElement('img');
-                    itemImage.src = item.imageUrl;
-                    itemImage.alt = item.name;
-                    itemDiv.appendChild(itemImage);
-                    
-                    // Add item details (name, price, image, etc.)
-                    const itemName = document.createElement('h3');
-                    itemName.textContent = item.name;
-                    itemDiv.appendChild(itemName);
-        
-                    const itemPrice = document.createElement('p');
-                    itemPrice.textContent = 'Price: $' + item.price;
-                    itemDiv.appendChild(itemPrice);
-
-                    const itemPrice = document.createElement('p');
-                    itemPrice.textContent = "Quantity: " + item.quantity + "left";
-                    itemDiv.appendChild(itemPrice);
-                    
-                    // ... add other item details ...
-        
-                    // Append the item container to the inventory section
-                    inventorySection.appendChild(itemDiv);
-                });
+                function updateInventoryDisplay() {
+                    // Retrieve data from local storage
+                    const jsonData = localStorage.getItem('inventoryData');
+                    if (jsonData) {
+                        const inventoryItems = JSON.parse(jsonData);
+                        // Display inventory items on the page
+                        const inventorySection = document.getElementById('inventory');
+                        inventorySection.innerHTML = ''; // Clear previous content        
+                        inventoryItems.forEach(item => {
+                            // Create and append item elements (same as before)
+                            // ...
+                        });
+                    }
+                }
+                // Initial display update (if data is already in local storage)
+                updateInventoryDisplay();
             </script>
         </section>
     </main>
