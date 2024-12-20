@@ -29,16 +29,24 @@
                     // Create a container for each item
                     const itemDiv = document.createElement('div');
                     itemDiv.classList.add('inventory-item'); // Add a class for styling
-        
+
+                    const itemImage = document.createElement('img');
+                    itemImage.src = item.imageUrl;
+                    itemDiv.appendChild(itemImage);
+                    
                     // Add item details (name, price, image, etc.)
                     const itemName = document.createElement('h3');
                     itemName.textContent = item.name;
                     itemDiv.appendChild(itemName);
         
                     const itemPrice = document.createElement('p');
-                    itemPrice.textContent = '$' + item.price;
+                    itemPrice.textContent = 'Price: $' + item.price;
                     itemDiv.appendChild(itemPrice);
-        
+
+                    const itemPrice = document.createElement('p');
+                    itemPrice.textContent = "Quantity: " + item.quantity + "left";
+                    itemDiv.appendChild(itemPrice);
+                    
                     // ... add other item details ...
         
                     // Append the item container to the inventory section
