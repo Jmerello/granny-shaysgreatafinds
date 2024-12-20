@@ -22,6 +22,17 @@
     <main>
         <section id="inventory">
             <!-- Inventory items will be dynamically added here -->
+            <script>
+                fetch('inventory.json') // Fetch the JSON data
+                    .then(response => response.json())
+                    .then(inventoryItems => {
+                        // Display inventory items on the page
+                        const inventorySection = document.getElementById('inventory');
+                        inventoryItems.forEach(item => {
+                            // ... create and append item elements ...
+                        });
+                    });
+            </script>
         </section>
     </main>
 
