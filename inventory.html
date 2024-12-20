@@ -23,16 +23,27 @@
         <section id="inventory">
             <!-- Inventory items will be dynamically added here -->
             <script>
-        // Retrieve data from local storage
-                const jsonData = localStorage.getItem('inventoryData');
-                if (jsonData) {
-                    const inventoryItems = JSON.parse(jsonData);
-                    // Display inventory items on the page
-                    const inventorySection = document.getElementById('inventory');
-                    inventoryItems.forEach(item => {
-                        // ... create and append item elements ...
-                    });
-                }
+        // ... (JavaScript code to retrieve data from local storage) ...
+
+                inventoryItems.forEach(item => {
+                    // Create a container for each item
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('inventory-item'); // Add a class for styling
+        
+                    // Add item details (name, price, image, etc.)
+                    const itemName = document.createElement('h3');
+                    itemName.textContent = item.name;
+                    itemDiv.appendChild(itemName);
+        
+                    const itemPrice = document.createElement('p');
+                    itemPrice.textContent = '$' + item.price;
+                    itemDiv.appendChild(itemPrice);
+        
+                    // ... add other item details ...
+        
+                    // Append the item container to the inventory section
+                    inventorySection.appendChild(itemDiv);
+                });
             </script>
         </section>
     </main>
