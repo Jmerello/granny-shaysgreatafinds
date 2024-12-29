@@ -5,7 +5,7 @@ const fs = require('fs');
 app.use(express.json());
 
 app.post('/update-inventory', (req, res) => {
-    const inventoryData = req.body;
+    res.send(req.body); // Echo back the received data
 
     // Generate HTML content from inventory data
     const htmlContent = generateHtmlFromInventory(inventoryData);
