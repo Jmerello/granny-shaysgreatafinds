@@ -4,17 +4,6 @@ const fs = require('fs');
 
 app.use(express.json());
 
-app.get('/inventory', (req, res) => {
-    fs.readFile('inventory.html', 'utf8', (err, data) => {
-        if (err) {
-            console.error("Failed to read inventory.html:", err);
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-        res.send(data); 
-    });
-});
-
 app.post('/update-inventory', (req, res) => {
     const inventoryData = req.body;
 
@@ -78,6 +67,18 @@ function generateHtmlFromInventory(inventoryData) {
         </html>
     ';
 }
+
+// Serve inventory.html on GET request to /inventory
+app.get('/inventory', (req, res) => {
+    fs.readFile('inventory.html', 'utf8', (err, data) => {
+        if (err) {
+            console.error("Failed to read inventory.html:", err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        res.send(data); 
+    });
+});
 
 // Start the server
 const port = 3000; // Or any port you prefer
