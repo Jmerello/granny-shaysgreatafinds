@@ -1,7 +1,7 @@
 // Function to fetch and display inventory items
 function displayInventoryItems() {
     // Replace with your Android app's IP address and port
-    const androidAppServerUrl = 'http://10.43.149.76:2600:381:f82b:6e6f:19d4:3645:30eb:6365'; // Example IP and port
+    const androidAppServerUrl = 'http://10.43.149.76:8080'; // IP and port
 
     fetch(androidAppServerUrl + '/inventory.json') // Fetch data from Android app server
         .then(response => response.json())
