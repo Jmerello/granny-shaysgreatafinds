@@ -4,6 +4,17 @@ const fs = require('fs');
 
 app.use(express.json());
 
+app.get('/inventory', (req, res) => {
+    fs.readFile('inventory.html', 'utf8', (err, data) => {
+        if (err) {
+            console.error("Failed to read inventory.html:", err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        res.send(data); 
+    });
+});
+
 app.post('/update-inventory', (req, res) => {
     const inventoryData = req.body;
 
