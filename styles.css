@@ -48,6 +48,14 @@ main {
     text-align: center;
 }
 
+section{
+    text-align: center;
+}
+
+div{
+    text-align: center
+}
+
 .item {
     border: 1px solid #ccc;
     border-radius: 5px;
