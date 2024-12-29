@@ -20,17 +20,17 @@ app.post('/update-inventory', (req, res) => {
 function generateHtmlFromInventory(inventoryData) {
     let inventoryItemsHtml = '';
     inventoryData.forEach(item => {
-        inventoryItemsHtml += `
+        inventoryItemsHtml += '
             <div class="inventory-item">
                 <h3>${item.description}</h3>
                 <p>Price: $${item.price}</p>
                 <p>Quantity: ${item.quantity}</p>
                 <img src="${item.photoPath}" alt="${item.description}"> 
             </div>
-        `;
+        ';
     });
 
-    return `
+    return '
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -65,7 +65,7 @@ function generateHtmlFromInventory(inventoryData) {
             <script src="script.js"></script>
         </body>
         </html>
-    `;
+    ';
 }
 
 // Start the server
