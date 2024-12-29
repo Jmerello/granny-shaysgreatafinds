@@ -95,11 +95,30 @@ footer {
         flex-direction: column;
     }
 
+    main {
+    padding: 2em;
+    text-align: center;
+    flex: 1;
+    }
+    
+    section{
+        text-align: center;
+    }
+    
+    div{
+        text-align: center
+    }
+
     .item {
         width: 90%;
     }
 
     footer {
+        background-color: #2e3b4e;
+        color: white;
+        text-align: center;
         position: relative;
+        bottom: 0;
+        width: 100%;
     }
 }
