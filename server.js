@@ -1,7 +1,7 @@
 // Function to fetch and display inventory items
 function displayInventoryItems() {
     // Replace with your Android app's IP address and port
-    const androidAppServerUrl = 'http://192.168.1.100:8080'; // Example IP and port
+    const androidAppServerUrl = 'http://10.43.149.76:2600:381:f82b:6e6f:19d4:3645:30eb:6365'; // Example IP and port
 
     fetch(androidAppServerUrl + '/inventory.json') // Fetch data from Android app server
         .then(response => response.json())
@@ -22,9 +22,10 @@ function displayInventoryItems() {
             });
         })
         .catch(error => {
-            console.error('Error fetching inventory items:', error);
-            // Handle the error, e.g., display an error message to the user
-        });
+    console.error('Error fetching inventory items:', error);
+    // Retry the connection after a delay
+    setTimeout(displayInventoryItems, 5000); // Retry after 5 seconds
+  });
 }
 
 // Call the function to initially display the items
