@@ -26,7 +26,7 @@ function displayInventoryItems() {
             // Display an error message on the web page
             const errorDiv = document.createElement('div');
             errorDiv.textContent = 'Error loading inventory data. Please try again later.';
-            document.body.appendChild(errorDiv); // Or append to a specific container
+            document.body.appendChild(itemDiv); // Or append to a specific container
         });
 }
 
