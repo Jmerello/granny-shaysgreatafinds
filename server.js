@@ -1,23 +1,33 @@
-// Function to fetch and display inventory items
 function displayInventoryItems() {
-    // Replace with your Android app's IP address and port
-    const androidAppServerUrl = 'http://10.43.149.76:8080'; // Example - replace with your actual values
-
     fetch('/get-inventory')
-    .then(response => response.json())
-    .then(data => {
-        // Process and display the data on the web page
-        const inventoryContainer = document.getElementById('inventory-container');
-        data.forEach(item => {
-            const itemDiv = document.createElement('div');
-            itemDiv.innerHTML = `<h2>${item.description}</h2><p>Price: $${item.price}</p><p>Quantity: ${item.quantity}</p>`;
-            inventoryContainer.appendChild(itemDiv);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const inventoryContainer = document.getElementById('inventory-container');
+            if (data && data.length > 0) {
+                data.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.innerHTML = `<h2>${item.description}</h2><p>Price: $${item.price}</p><p>Quantity: ${item.quantity}</p>`;
+                    inventoryContainer.appendChild(itemDiv);
+                });
+            } else {
+                // Display a default message if no data is available
+                const defaultMessage = document.createElement('p');
+                defaultMessage.textContent = 'No inventory items found.';
+                inventoryContainer.appendChild(defaultMessage);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching inventory data:', error);
+            // Display an error message on the web page
+            const errorDiv = document.createElement('div');
+            errorDiv.textContent = 'Error loading inventory data. Please try again later.';
+            document.body.appendChild(errorDiv); // Or append to a specific container
         });
-    })
-    .catch(error => {
-        console.error('Error fetching inventory data:', error);
-    });
 }
 
-// Call the function to initially display the items
 displayInventoryItems();
