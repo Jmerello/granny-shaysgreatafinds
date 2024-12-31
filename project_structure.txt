@@ -1,0 +1,69 @@
+Project Folder Structure
+
+Root Directory: project-root
+
+The main directory containing all project files.
+
+Files in the Root Directory:
+
+  README.md: Project documentation.
+  
+  package.json: Node.js project configuration file.
+  
+  package-lock.json: Automatically generated for exact dependency versions.
+
+  .gitignore: Lists files and folders to exclude from Git version control.
+
+Folder: public
+
+  Contains static assets and server-side scripts.
+
+Files in public:
+
+  index.html: Landing page.
+  
+  inventory.html: Inventory page for items in the store.
+  
+  contact_us.html: Page with contact information.
+  
+  cart.html: Shopping cart interface.
+  
+  styles.css: Global stylesheet for all pages.
+  
+  server.js: Main server script for handling requests.
+
+Folder: src
+
+  Contains server-side logic and modular routes.
+
+Files in src:
+
+  app.js: Main application logic to initialize and run the server.
+  
+  Subfolder: routes
+  
+  Handles backend routing.
+
+Files in routes:
+
+  inventory.js: API routes for managing inventory.
+
+project-root/
+│
+├── public/
+│   ├── index.html
+│   ├── inventory.html
+│   ├── contact_us.html
+│   ├── cart.html
+│   ├── styles.css
+│   └── server.js
+│
+├── src/
+│   ├── app.js
+│   └── routes/
+│       └── inventory.js
+│
+├── README.md
+├── package.json
+├── package-lock.json
+└── .gitignore
